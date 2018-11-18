@@ -5,17 +5,19 @@
 Summary:	Library to create or query compressed XML files
 Summary(pl.UTF-8):	Biblioteka do tworzenia i odpytywania skompresowanych plików XML
 Name:		libxmlb
-Version:	0.1.2
+Version:	0.1.4
 Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
 Source0:	https://people.freedesktop.org/~hughsient/releases/%{name}-%{version}.tar.xz
-# Source0-md5:	b8346bbcf8318f5546822ede2d7de64a
+# Source0-md5:	44ae38a44762490607862432f35a1f06
 URL:		https://github.com/hughsie/libxmlb
 BuildRequires:	glib2-devel >= 1:2.45.8
+BuildRequires:	gobject-introspection-devel
 %{?with_apidocs:BuildRequires:	gtk-doc}
+BuildRequires:	libstemmer-devel
 BuildRequires:	libuuid-devel
-BuildRequires:	meson >= 0.46.0
+BuildRequires:	meson >= 0.47.0
 BuildRequires:	ninja
 BuildRequires:	rpmbuild(macros) >= 1.727
 BuildRequires:	tar >= 1:1.22
@@ -53,12 +55,25 @@ Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki libxmlb
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	glib2-devel >= 1:2.45.8
+Requires:	libstemmer-devel
 
 %description devel
 Header files for libxmlb library.
 
 %description devel -l pl.UTF-8
 Pliki nagłówkowe biblioteki libxmlb.
+
+%package static
+Summary:	Static libxmlb library
+Summary(pl.UTF-8):	Statyczna biblioteka libxmlb
+Group:		Development/Libraries
+Requires:	%{name}-devel = %{version}-%{release}
+
+%description static
+Static libxmlb library.
+
+%description static -l pl.UTF-8
+Statyczna biblioteka libxmlb.
 
 %package apidocs
 Summary:	API documentation for libxmlb library
@@ -78,6 +93,7 @@ Dokumentacja API biblioteki libxmlb.
 %setup -q
 
 %build
+CPPFLAGS="%{rpmcppflags} -I/usr/include/libstemmer"
 %meson build \
 	%{!?with_apidocs:-Dgtkdoc=false}
 
@@ -108,6 +124,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/libxmlb-1
 %{_datadir}/gir-1.0/Xmlb-1.0.gir
 %{_pkgconfigdir}/xmlb.pc
+
+%files static
+%defattr(644,root,root,755)
+%{_libdir}/libxmlb.a
 
 %if %{with apidocs}
 %files apidocs
