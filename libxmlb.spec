@@ -1,25 +1,26 @@
 #
 # Conditional build:
-%bcond_without	apidocs		# API documentation
+%bcond_without	apidocs	# API documentation
+%bcond_without	stemmer	# stemmer support
 #
 Summary:	Library to create or query compressed XML files
 Summary(pl.UTF-8):	Biblioteka do tworzenia i odpytywania skompresowanych plików XML
 Name:		libxmlb
-Version:	0.1.7
+Version:	0.1.11
 Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
 Source0:	https://people.freedesktop.org/~hughsient/releases/%{name}-%{version}.tar.xz
-# Source0-md5:	356fbf3295b91901f2e932e812e3a969
+# Source0-md5:	6f65f040ff3137bc35250c87d7eb69dd
 URL:		https://github.com/hughsie/libxmlb
 BuildRequires:	glib2-devel >= 1:2.45.8
 BuildRequires:	gobject-introspection-devel
 %{?with_apidocs:BuildRequires:	gtk-doc}
-BuildRequires:	libstemmer-devel
+%{?with_stemmer:BuildRequires:	libstemmer-devel}
 BuildRequires:	libuuid-devel
 BuildRequires:	meson >= 0.47.0
-BuildRequires:	ninja
-BuildRequires:	rpmbuild(macros) >= 1.727
+BuildRequires:	ninja >= 1.5
+BuildRequires:	rpmbuild(macros) >= 1.736
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 Requires:	glib2 >= 1:2.45.8
@@ -93,16 +94,20 @@ Dokumentacja API biblioteki libxmlb.
 %setup -q
 
 %build
+%if %{with stemmer}
 CPPFLAGS="%{rpmcppflags} -I/usr/include/libstemmer"
+%endif
 %meson build \
-	%{!?with_apidocs:-Dgtkdoc=false}
+	%{!?with_apidocs:-Dgtkdoc=false} \
+	%{?with_stemmer:-Dstemmer=true} \
+	-Dtests=false
 
-%meson_build -C build
+%ninja_build -C build
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%meson_install -C build
+%ninja_install -C build
 
 %clean
 rm -rf $RPM_BUILD_ROOT
