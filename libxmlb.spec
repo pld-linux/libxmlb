@@ -6,12 +6,12 @@
 Summary:	Library to create or query compressed XML files
 Summary(pl.UTF-8):	Biblioteka do tworzenia i odpytywania skompresowanych plików XML
 Name:		libxmlb
-Version:	0.1.15
+Version:	0.2.1
 Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
 Source0:	https://people.freedesktop.org/~hughsient/releases/%{name}-%{version}.tar.xz
-# Source0-md5:	2608c889aa4c276b4dc600c0708acc41
+# Source0-md5:	db10cadd8758a51e87a0e7b1fbe6cdee
 URL:		https://github.com/hughsie/libxmlb
 BuildRequires:	glib2-devel >= 1:2.45.8
 BuildRequires:	gobject-introspection-devel
@@ -20,6 +20,7 @@ BuildRequires:	gobject-introspection-devel
 BuildRequires:	libuuid-devel
 BuildRequires:	meson >= 0.47.0
 BuildRequires:	ninja >= 1.5
+BuildRequires:	python3 >= 1:3
 BuildRequires:	rpmbuild(macros) >= 1.736
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
@@ -80,7 +81,7 @@ Statyczna biblioteka libxmlb.
 Summary:	API documentation for libxmlb library
 Summary(pl.UTF-8):	Dokumentacja API biblioteki libxmlb
 Group:		Documentation
-%if "%{_rpmversion}" >= "5"
+%if "%{_rpmversion}" >= "4.6"
 BuildArch:	noarch
 %endif
 
@@ -119,15 +120,15 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc MAINTAINERS NEWS README.md
 %attr(755,root,root) %{_libdir}/libxmlb.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libxmlb.so.1
-%{_libdir}/girepository-1.0/Xmlb-1.0.typelib
+%attr(755,root,root) %ghost %{_libdir}/libxmlb.so.2
+%{_libdir}/girepository-1.0/Xmlb-2.0.typelib
 %attr(755,root,root) %{_libexecdir}/xb-tool
 
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libxmlb.so
-%{_includedir}/libxmlb-1
-%{_datadir}/gir-1.0/Xmlb-1.0.gir
+%{_includedir}/libxmlb-2
+%{_datadir}/gir-1.0/Xmlb-2.0.gir
 %{_pkgconfigdir}/xmlb.pc
 
 %files static
