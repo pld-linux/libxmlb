@@ -81,9 +81,7 @@ Statyczna biblioteka libxmlb.
 Summary:	API documentation for libxmlb library
 Summary(pl.UTF-8):	Dokumentacja API biblioteki libxmlb
 Group:		Documentation
-%if "%{_rpmversion}" >= "4.6"
 BuildArch:	noarch
-%endif
 
 %description apidocs
 API documentation for libxmlb library.
