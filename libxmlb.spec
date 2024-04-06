@@ -6,20 +6,20 @@
 Summary:	Library to create or query compressed XML files
 Summary(pl.UTF-8):	Biblioteka do tworzenia i odpytywania skompresowanych plików XML
 Name:		libxmlb
-Version:	0.3.15
+Version:	0.3.17
 Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
 #Source0Download: https://github.com/hughsie/libxmlb/releases
 Source0:	https://github.com/hughsie/libxmlb/releases/download/%{version}/%{name}-%{version}.tar.xz
-# Source0-md5:	ff8f7cefefc89d8bed97b911cb38fa9c
+# Source0-md5:	e7cb264e48f0c767de1e10bfc65a48f0
 URL:		https://github.com/hughsie/libxmlb
 BuildRequires:	glib2-devel >= 1:2.45.8
 BuildRequires:	gobject-introspection-devel
 %{?with_apidocs:BuildRequires:	gtk-doc}
 %{?with_stemmer:BuildRequires:	libstemmer-devel}
 BuildRequires:	libuuid-devel
-BuildRequires:	meson >= 0.47.0
+BuildRequires:	meson >= 0.60.0
 BuildRequires:	ninja >= 1.5
 BuildRequires:	python3 >= 1:3
 BuildRequires:	rpm-build >= 4.6
