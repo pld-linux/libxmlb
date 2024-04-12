@@ -1,7 +1,8 @@
 #
 # Conditional build:
-%bcond_without	apidocs	# API documentation
-%bcond_without	stemmer	# stemmer support
+%bcond_without	apidocs		# API documentation
+%bcond_without	static_libs	# static library
+%bcond_without	stemmer		# stemmer support
 #
 Summary:	Library to create or query compressed XML files
 Summary(pl.UTF-8):	Biblioteka do tworzenia i odpytywania skompresowanych plików XML
@@ -104,6 +105,7 @@ Dokumentacja API biblioteki libxmlb.
 CPPFLAGS="%{rpmcppflags} -I/usr/include/libstemmer"
 %endif
 %meson build \
+	%{!?with_static_libs:--default-library=shared} \
 	%{!?with_apidocs:-Dgtkdoc=false} \
 	%{?with_stemmer:-Dstemmer=true} \
 	-Dtests=false
@@ -137,9 +139,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/gir-1.0/Xmlb-2.0.gir
 %{_pkgconfigdir}/xmlb.pc
 
+%if %{with static_libs}
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/libxmlb.a
+%endif
 
 %if %{with apidocs}
 %files apidocs
