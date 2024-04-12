@@ -21,6 +21,7 @@ BuildRequires:	gobject-introspection-devel
 BuildRequires:	libuuid-devel
 BuildRequires:	meson >= 0.60.0
 BuildRequires:	ninja >= 1.5
+BuildRequires:	pkgconfig
 BuildRequires:	python3 >= 1:3
 BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 1.736
