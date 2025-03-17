@@ -7,13 +7,13 @@
 Summary:	Library to create or query compressed XML files
 Summary(pl.UTF-8):	Biblioteka do tworzenia i odpytywania skompresowanych plików XML
 Name:		libxmlb
-Version:	0.3.21
+Version:	0.3.22
 Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
 #Source0Download: https://github.com/hughsie/libxmlb/releases
 Source0:	https://github.com/hughsie/libxmlb/releases/download/%{version}/%{name}-%{version}.tar.xz
-# Source0-md5:	6f83ad887ffacaa1f393650845eb8a1b
+# Source0-md5:	534de564b028b7ef038238efb2e70d2f
 URL:		https://github.com/hughsie/libxmlb
 BuildRequires:	glib2-devel >= 1:2.45.8
 BuildRequires:	gobject-introspection-devel
@@ -25,7 +25,7 @@ BuildRequires:	ninja >= 1.5
 BuildRequires:	pkgconfig
 BuildRequires:	python3 >= 1:3
 BuildRequires:	rpm-build >= 4.6
-BuildRequires:	rpmbuild(macros) >= 1.736
+BuildRequires:	rpmbuild(macros) >= 2.042
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 BuildRequires:	xz-devel
@@ -104,18 +104,20 @@ Dokumentacja API biblioteki libxmlb.
 %if %{with stemmer}
 CPPFLAGS="%{rpmcppflags} -I/usr/include/libstemmer"
 %endif
-%meson build \
+%meson \
 	%{!?with_static_libs:--default-library=shared} \
 	%{!?with_apidocs:-Dgtkdoc=false} \
+	-Dlzma=enabled \
 	%{?with_stemmer:-Dstemmer=true} \
-	-Dtests=false
+	-Dtests=false \
+	-Dzstd=enabled
 
-%ninja_build -C build
+%meson_build
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%ninja_install -C build
+%meson_install
 
 %clean
 rm -rf $RPM_BUILD_ROOT
