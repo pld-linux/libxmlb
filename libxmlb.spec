@@ -7,13 +7,13 @@
 Summary:	Library to create or query compressed XML files
 Summary(pl.UTF-8):	Biblioteka do tworzenia i odpytywania skompresowanych plików XML
 Name:		libxmlb
-Version:	0.3.22
+Version:	0.3.23
 Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
 #Source0Download: https://github.com/hughsie/libxmlb/releases
 Source0:	https://github.com/hughsie/libxmlb/releases/download/%{version}/%{name}-%{version}.tar.xz
-# Source0-md5:	534de564b028b7ef038238efb2e70d2f
+# Source0-md5:	603bb57fcb1052ee900e7c82fbe4da4b
 URL:		https://github.com/hughsie/libxmlb
 BuildRequires:	glib2-devel >= 1:2.45.8
 BuildRequires:	gobject-introspection-devel
@@ -130,13 +130,13 @@ rm -rf $RPM_BUILD_ROOT
 %doc MAINTAINERS NEWS README.md
 %attr(755,root,root) %{_bindir}/xb-tool
 %attr(755,root,root) %{_libdir}/libxmlb.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libxmlb.so.2
+%ghost %{_libdir}/libxmlb.so.2
 %{_libdir}/girepository-1.0/Xmlb-2.0.typelib
 %{_mandir}/man1/xb-tool.1*
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libxmlb.so
+%{_libdir}/libxmlb.so
 %{_includedir}/libxmlb-2
 %{_datadir}/gir-1.0/Xmlb-2.0.gir
 %{_pkgconfigdir}/xmlb.pc
