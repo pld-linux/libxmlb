@@ -7,15 +7,15 @@
 Summary:	Library to create or query compressed XML files
 Summary(pl.UTF-8):	Biblioteka do tworzenia i odpytywania skompresowanych plików XML
 Name:		libxmlb
-Version:	0.3.24
+Version:	0.3.27
 Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
 #Source0Download: https://github.com/hughsie/libxmlb/releases
 Source0:	https://github.com/hughsie/libxmlb/releases/download/%{version}/%{name}-%{version}.tar.xz
-# Source0-md5:	90c6b8d3cb27fce0001cb0917c5f54c1
+# Source0-md5:	b0c73036693fed07383022a67264b5eb
 URL:		https://github.com/hughsie/libxmlb
-BuildRequires:	glib2-devel >= 1:2.45.8
+BuildRequires:	glib2-devel >= 1:2.68.0
 BuildRequires:	gobject-introspection-devel
 %{?with_apidocs:BuildRequires:	gtk-doc}
 %{?with_stemmer:BuildRequires:	libstemmer-devel}
@@ -30,7 +30,7 @@ BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 BuildRequires:	xz-devel
 BuildRequires:	zstd-devel
-Requires:	glib2 >= 1:2.45.8
+Requires:	glib2 >= 1:2.68.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -62,7 +62,7 @@ Summary:	Header files for libxmlb library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki libxmlb
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	glib2-devel >= 1:2.45.8
+Requires:	glib2-devel >= 1:2.68.0
 Requires:	libstemmer-devel
 Requires:	xz-devel
 Requires:	zstd-devel
@@ -127,9 +127,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc MAINTAINERS NEWS README.md
+%doc MAINTAINERS NEWS README.md SECURITY.md
 %attr(755,root,root) %{_bindir}/xb-tool
-%attr(755,root,root) %{_libdir}/libxmlb.so.*.*.*
+%{_libdir}/libxmlb.so.*.*.*
 %ghost %{_libdir}/libxmlb.so.2
 %{_libdir}/girepository-1.0/Xmlb-2.0.typelib
 %{_mandir}/man1/xb-tool.1*
